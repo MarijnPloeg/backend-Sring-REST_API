@@ -11,12 +11,13 @@ public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "brandid")
     private long brandID;
 
-    @Column(nullable = false)
+    @Column(name = "brand_name" ,nullable = false)
     private String brandName;
 
-    @Column(nullable = false)
+    @Column(name = "brand_type",nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private BrandType brandType;
 
