@@ -24,8 +24,7 @@ public class AddressServiceImpl implements AddressService {
     public Address getAddressById(long id) {
         if (addressRepository.existsById(id)) {
             return addressRepository.findById(id).orElse(null);
-        }
-        else {
+        } else {
             throw new RecordNotFoundException();
         }
     }
@@ -34,8 +33,7 @@ public class AddressServiceImpl implements AddressService {
     public void deleteAddress(long id) {
         if (addressRepository.existsById(id)) {
             addressRepository.deleteById(id);
-        }
-        else {
+        } else {
             throw new RecordNotFoundException();
         }
     }
