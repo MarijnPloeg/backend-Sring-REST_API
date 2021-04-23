@@ -2,12 +2,11 @@ package nl.marijnploeg.kitereparatie.service;
 
 import nl.marijnploeg.kitereparatie.model.Brand;
 import nl.marijnploeg.kitereparatie.model.BrandType;
-import nl.marijnploeg.kitereparatie.repository.Brand.BrandRepository;
+import nl.marijnploeg.kitereparatie.repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BrandService {

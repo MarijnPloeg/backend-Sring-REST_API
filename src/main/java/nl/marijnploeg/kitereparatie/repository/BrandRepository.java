@@ -1,4 +1,4 @@
-package nl.marijnploeg.kitereparatie.repository.Brand;
+package nl.marijnploeg.kitereparatie.repository;
 
 import nl.marijnploeg.kitereparatie.model.Brand;
 
