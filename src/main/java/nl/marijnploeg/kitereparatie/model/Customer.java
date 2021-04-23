@@ -8,7 +8,6 @@ import lombok.extern.apachecommons.CommonsLog;
 import javax.persistence.*;
 import java.util.List;
 
-@Getter @Setter @NoArgsConstructor
 @Entity
 public class Customer {
 
@@ -23,9 +22,70 @@ public class Customer {
     private String email;
 
     @Column(nullable = false)
-    private String name;
+    private String firstname;
+
+    @Column(nullable = false)
+    private String lastname;
 
     @OneToMany(mappedBy = "customerID")
     private List<Repair> repairs;
 
+    public Customer() {
+    }
+
+    public Customer(Address addressID, String email, String firstname, String lastname, List<Repair> repairs) {
+        this.addressID = addressID;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.repairs = repairs;
+    }
+
+    public long getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(long customerID) {
+        this.customerID = customerID;
+    }
+
+    public Address getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(Address addressID) {
+        this.addressID = addressID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public List<Repair> getRepairs() {
+        return repairs;
+    }
+
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
+    }
 }
