@@ -27,7 +27,7 @@ public class Customer {
     @Column(nullable = false)
     private String lastname;
 
-    @OneToMany(mappedBy = "customerID")
+    @OneToMany(mappedBy = "repairID")
     private List<Repair> repairs;
 
     public Customer() {

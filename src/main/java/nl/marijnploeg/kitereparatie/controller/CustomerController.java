@@ -11,33 +11,33 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/list")
+    @GetMapping("")
     public ResponseEntity<Object> getAllCustomers() {
         return ResponseEntity.ok().body(customerService.getCustomers());
     }
 
-    @GetMapping("/{firstname}")
+    @GetMapping("/firstname/{firstname}")
     public ResponseEntity<Object> getCustomerByFirstName(@PathVariable String firstname) {
         return ResponseEntity.ok().body(customerService.getCustomerByFirstName(firstname));
     }
 
-    @GetMapping("/{lastname}")
+    @GetMapping("/lastname/{lastname}")
     public ResponseEntity<Object> getCustomerByLastName(@PathVariable String lastname) {
         return ResponseEntity.ok().body(customerService.getCustomersByLastName(lastname));
     }
 
-    @GetMapping("/{addressId}")
+    @GetMapping("/addressId/{addressId}")
     public ResponseEntity<Object> getCustomerByAddressId(@PathVariable Address addressId) {
         return ResponseEntity.ok().body(customerService.getCustomerByAddressId(addressId));
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Object> getCustomerByEmail(@PathVariable String email) {
         return ResponseEntity.ok().body(customerService.getCustomerByEmail(email));
     }

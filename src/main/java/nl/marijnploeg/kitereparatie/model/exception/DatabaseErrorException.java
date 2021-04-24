@@ -1,4 +1,4 @@
-package nl.marijnploeg.kitereparatie.exception;
+package nl.marijnploeg.kitereparatie.model.exception;
 
 public class DatabaseErrorException extends RuntimeException {
 }

@@ -1,7 +1,7 @@
 package nl.marijnploeg.kitereparatie.service;
 
-import nl.marijnploeg.kitereparatie.exception.DatabaseErrorException;
-import nl.marijnploeg.kitereparatie.exception.RecordNotFoundException;
+import nl.marijnploeg.kitereparatie.model.exception.DatabaseErrorException;
+import nl.marijnploeg.kitereparatie.model.exception.RecordNotFoundException;
 import nl.marijnploeg.kitereparatie.model.Address;
 import nl.marijnploeg.kitereparatie.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,4 +61,6 @@ public class AddressService {
             throw new RecordNotFoundException();
         }
     }
+
+//  DTO / Payload voor custom methodes
 }
