@@ -27,17 +27,21 @@ public class Customer {
     @Column(nullable = false)
     private String lastname;
 
+    @Column(nullable = false)
+    private String password;
+
     @OneToMany(mappedBy = "repairID")
     private List<Repair> repairs;
 
     public Customer() {
     }
 
-    public Customer(Address addressID, String email, String firstname, String lastname, List<Repair> repairs) {
+    public Customer(Address addressID, String email, String firstname, String lastname, String password, List<Repair> repairs) {
         this.addressID = addressID;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.password = password;
         this.repairs = repairs;
     }
 
@@ -79,6 +83,14 @@ public class Customer {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Repair> getRepairs() {

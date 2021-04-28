@@ -17,6 +17,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @CrossOrigin
     @GetMapping("")
     public ResponseEntity<Object> getAllCustomers() {
         return ResponseEntity.ok().body(customerService.getCustomers());
@@ -42,7 +43,8 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerService.getCustomerByEmail(email));
     }
 
-    @PostMapping("")
+    @CrossOrigin
+    @PostMapping("/register")
     public ResponseEntity<Object> saveCustomer(@RequestBody Customer customer) {
         long newId = customerService.saveCustomer(customer);
 
