@@ -1,15 +1,16 @@
 package nl.marijnploeg.kitereparatie.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Array;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     @Id
@@ -37,81 +38,4 @@ public class Address {
     @Column(nullable = false, length = 200)
     private String country;
 
-    public Address(long addressID, List<Customer> customerID, String streetName, int houseNumber, String city, String postalCode, String state, String country) {
-        this.addressID = addressID;
-        this.customerID = customerID;
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
-        this.city = city;
-        this.postalCode = postalCode;
-        State = state;
-        this.country = country;
-    }
-
-    public Address() {
-    }
-
-    public long getAddressID() {
-        return addressID;
-    }
-
-    public void setAddressID(long addressID) {
-        this.addressID = addressID;
-    }
-
-    public List<Customer> getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(List<Customer> customerID) {
-        this.customerID = customerID;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public int getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(int houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getState() {
-        return State;
-    }
-
-    public void setState(String state) {
-        State = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

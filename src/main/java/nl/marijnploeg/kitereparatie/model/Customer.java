@@ -1,15 +1,23 @@
 package nl.marijnploeg.kitereparatie.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
+import nl.marijnploeg.kitereparatie.model.Authority.Authority;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Customer {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Customer extends AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,85 +27,11 @@ public class Customer {
     private Address addressID;
 
     @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = false)
     private String firstname;
 
     @Column(nullable = false)
     private String lastname;
 
-    @Column(nullable = false)
-    private String password;
-
     @OneToMany(mappedBy = "repairID")
     private List<Repair> repairs;
-
-    public Customer() {
-    }
-
-    public Customer(Address addressID, String email, String firstname, String lastname, String password, List<Repair> repairs) {
-        this.addressID = addressID;
-        this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.repairs = repairs;
-    }
-
-    public long getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(long customerID) {
-        this.customerID = customerID;
-    }
-
-    public Address getAddressID() {
-        return addressID;
-    }
-
-    public void setAddressID(Address addressID) {
-        this.addressID = addressID;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Repair> getRepairs() {
-        return repairs;
-    }
-
-    public void setRepairs(List<Repair> repairs) {
-        this.repairs = repairs;
-    }
 }

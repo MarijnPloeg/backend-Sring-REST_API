@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
 @RestController
@@ -43,14 +44,14 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerService.getCustomerByEmail(email));
     }
 
-    @CrossOrigin
-    @PostMapping("/register")
-    public ResponseEntity<Object> saveCustomer(@RequestBody Customer customer) {
-        long newId = customerService.saveCustomer(customer);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newId).toUri();
-
-        return ResponseEntity.created(location).body("New customer created on " + location);
-    }
+//    @CrossOrigin
+//    @PostMapping("/register")
+//    public ResponseEntity<Object> saveCustomer(@RequestBody Customer customer ) {
+//        long newId = customerService.saveCustomer(customer);
+//
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                .buildAndExpand(newId).toUri();
+//
+//        return ResponseEntity.created(location).body("New customer created on " + location);
+//    }
 }
