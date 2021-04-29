@@ -6,12 +6,14 @@ import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.model.Authority.Authority;
 import nl.marijnploeg.kitereparatie.model.Customer;
 import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
+import nl.marijnploeg.kitereparatie.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class AppUserService implements UserDetailsService {
 
     @Autowired
     private AppUserRepository appUserRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
 //    Overriding this method with email as username
@@ -31,6 +34,27 @@ public class AppUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return appUserRepository.findByEmail(email)
                 .orElseThrow(() -> new EmailNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+    }
+
+//    Method get username is set to return email. Application does not use username
+    public String signUpUser(AppUser appUser) {
+        boolean userExists = appUserRepository
+                .findByEmail(appUser.getUsername())
+                .isPresent();
+
+        if (userExists) {
+            throw new IllegalStateException("Email already taken!");
+        }
+
+        String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
+
+        appUser.setPassword(encodedPassword);
+
+        appUserRepository.save(appUser);
+
+//        TODO: Send confirmation token
+
+        return "";
     }
 
 //    public Set<Authority> getAuthorities(String email) {

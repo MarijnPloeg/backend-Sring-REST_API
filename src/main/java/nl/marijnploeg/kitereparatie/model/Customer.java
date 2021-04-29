@@ -19,18 +19,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Customer extends AppUser {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long customerID;
-
     @ManyToOne
     private Address addressID;
-
-    @Column(nullable = false)
-    private String firstname;
-
-    @Column(nullable = false)
-    private String lastname;
 
     @OneToMany(mappedBy = "repairID")
     private List<Repair> repairs;

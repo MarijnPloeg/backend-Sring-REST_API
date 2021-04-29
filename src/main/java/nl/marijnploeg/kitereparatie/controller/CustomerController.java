@@ -24,15 +24,6 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerService.getCustomers());
     }
 
-    @GetMapping("/firstname/{firstname}")
-    public ResponseEntity<Object> getCustomerByFirstName(@PathVariable String firstname) {
-        return ResponseEntity.ok().body(customerService.getCustomerByFirstName(firstname));
-    }
-
-    @GetMapping("/lastname/{lastname}")
-    public ResponseEntity<Object> getCustomerByLastName(@PathVariable String lastname) {
-        return ResponseEntity.ok().body(customerService.getCustomersByLastName(lastname));
-    }
 
     @GetMapping("/addressId/{addressId}")
     public ResponseEntity<Object> getCustomerByAddressId(@PathVariable Address addressId) {

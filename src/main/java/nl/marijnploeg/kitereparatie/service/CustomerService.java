@@ -31,14 +31,6 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public List<Customer> getCustomerByFirstName(String firstname) {
-        return customerRepository.findCustomerByFirstname(firstname);
-    }
-
-    public List<Customer> getCustomersByLastName(String lastName){
-        return customerRepository.findCustomerByLastname(lastName);
-    }
-
     public List<Customer> getCustomerByAddressId(Address addressId) {
         return customerRepository.findCustomerByAddressID(addressId);
     }
@@ -48,7 +40,7 @@ public class CustomerService {
     }
 
     public long saveCustomer(Customer customer) {
-        Customer newCustomer = customerRepository.save(customer);
-        return newCustomer.getCustomerID();
+        AppUser newCustomer = appUserRepository.save(customer);
+        return newCustomer.getId();
     }
 }

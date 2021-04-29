@@ -15,10 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Employee extends AppUser{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long employeeID;
-
     private String name;
 
     @ManyToMany
