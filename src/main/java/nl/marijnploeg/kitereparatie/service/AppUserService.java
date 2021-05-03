@@ -54,9 +54,6 @@ public class AppUserService implements UserDetailsService {
                 LocalDateTime.now().plusMinutes(15),
                 appUser
         );
-
-//        TODO: Send eMail
-
         confirmationTokenService.safeConfirmationToken(confirmationToken);
         return token;
     }
@@ -65,42 +62,4 @@ public class AppUserService implements UserDetailsService {
         return appUserRepository.enableAppUser(email);
     }
 
-
-//    public Set<Authority> getAuthorities(String email) {
-//        if (!appUserRepository.existsByEmail(email)) throw new EmailNotFoundException(email);
-//        AppUser appUser = appUserRepository.findCustomerByEmail(email);
-//        return appUser.getAuthorities();
-//    }
-//
-//    public void addAuthority(String email, String authority) {
-//        if (!appUserRepository.existsByEmail(email)) throw new EmailNotFoundException(email);
-//        AppUser appUser = appUserRepository.findCustomerByEmail(email);
-//        appUser.addAuthority(new Authority(email, authority));
-//        appUserRepository.save(appUser);
-//    }
-//
-//    public void removeAuthority(String email, String authority) {
-//        if (!appUserRepository.existsByEmail(email)) throw new EmailNotFoundException(email);
-//        AppUser appUser = appUserRepository.findCustomerByEmail(email);
-//        Authority authorityToRemove = appUser.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
-//        appUser.removeAuthority(authorityToRemove);
-//        appUserRepository.save(appUser);
-//    }
-//
-//    public UserDetails loadUserByEmail(String email) {
-//        AppUser appUser = appUserRepository.findCustomerByEmail(email);
-//        if (appUser == null) {
-//            throw new EmailNotFoundException(email);
-//        }
-//
-//        String password = appUser.getPassword();
-//
-//        Set<Authority> authorities = appUser.getAuthorities();
-//        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-//        for (Authority authority: authorities) {
-//            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
-//        }
-//
-//        return new org.springframework.security.core.userdetails.User(email, password, grantedAuthorities);
-//    }
 }
