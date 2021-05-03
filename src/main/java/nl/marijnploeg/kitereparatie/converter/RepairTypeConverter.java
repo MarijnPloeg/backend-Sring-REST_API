@@ -7,6 +7,7 @@ import javax.persistence.Converter;
 
 @Converter
 public class RepairTypeConverter implements AttributeConverter<RepairType, String > {
+
     @Override
     public String convertToDatabaseColumn(RepairType value) {
         if (value.equals(null)) {

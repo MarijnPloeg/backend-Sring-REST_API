@@ -16,11 +16,13 @@ public class RepairController {
     @Autowired
     private RepairService repairService;
 
+    @CrossOrigin
     @GetMapping(value = "")
     public ResponseEntity<Object> getRepairs() {
         return ResponseEntity.ok().body(repairService.getRepairs());
     }
 
+    @CrossOrigin
     @PostMapping(value = "")
     public ResponseEntity<Object> createRepair(@RequestBody Repair repair) {
         long newId = repairService.saveRepair(repair);

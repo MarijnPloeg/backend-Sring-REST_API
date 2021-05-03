@@ -19,25 +19,16 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerService.getCustomers());
     }
 
-
+    @CrossOrigin
     @GetMapping("/addressId/{addressId}")
     public ResponseEntity<Object> getCustomerByAddressId(@PathVariable Address addressId) {
         return ResponseEntity.ok().body(customerService.getCustomerByAddressId(addressId));
     }
 
+    @CrossOrigin
     @GetMapping("/email/{email}")
     public ResponseEntity<Object> getCustomerByEmail(@PathVariable String email) {
         return ResponseEntity.ok().body(customerService.getCustomerByEmail(email));
     }
 
-//    @CrossOrigin
-//    @PostMapping("/register")
-//    public ResponseEntity<Object> saveCustomer(@RequestBody Customer customer ) {
-//        long newId = customerService.saveCustomer(customer);
-//
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                .buildAndExpand(newId).toUri();
-//
-//        return ResponseEntity.created(location).body("New customer created on " + location);
-//    }
 }

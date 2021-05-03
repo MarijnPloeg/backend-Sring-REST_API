@@ -1,4 +1,4 @@
-package nl.marijnploeg.kitereparatie.security;
+package nl.marijnploeg.kitereparatie.security.registration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

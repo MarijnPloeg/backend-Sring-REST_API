@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import nl.marijnploeg.kitereparatie.email.EmailSender;
 import nl.marijnploeg.kitereparatie.model.ConfirmationToken;
 import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
-import nl.marijnploeg.kitereparatie.model.Enums.AppUserRole;
+import nl.marijnploeg.kitereparatie.security.rolesAndPermissions.AppUserRole;
 import nl.marijnploeg.kitereparatie.request.RegistrationRequest;
-import nl.marijnploeg.kitereparatie.security.EmailValidator;
+import nl.marijnploeg.kitereparatie.security.registration.EmailValidator;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
