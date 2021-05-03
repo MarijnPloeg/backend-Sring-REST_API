@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nl.marijnploeg.kitereparatie.model.*;
+import nl.marijnploeg.kitereparatie.model.Enums.BoardType;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter

@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nl.marijnploeg.kitereparatie.converter.RepairTypeConverter;
+import nl.marijnploeg.kitereparatie.model.Enums.DeliveryOption;
+import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
+import nl.marijnploeg.kitereparatie.model.UserRoles.Customer;
+import nl.marijnploeg.kitereparatie.model.UserRoles.Employee;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

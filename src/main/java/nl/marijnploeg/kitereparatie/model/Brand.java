@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nl.marijnploeg.kitereparatie.model.Enums.BrandType;
 
 import javax.persistence.*;
 

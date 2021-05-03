@@ -1,6 +1,6 @@
 package nl.marijnploeg.kitereparatie.converter;
 
-import nl.marijnploeg.kitereparatie.model.RepairType;
+import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

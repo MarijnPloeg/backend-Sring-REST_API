@@ -3,7 +3,7 @@ package nl.marijnploeg.kitereparatie.service;
 import nl.marijnploeg.kitereparatie.exception.DatabaseErrorException;
 import nl.marijnploeg.kitereparatie.exception.RecordNotFoundException;
 import nl.marijnploeg.kitereparatie.model.Repair;
-import nl.marijnploeg.kitereparatie.model.RepairType;
+import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
 import nl.marijnploeg.kitereparatie.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

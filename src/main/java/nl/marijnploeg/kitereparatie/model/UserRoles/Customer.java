@@ -1,22 +1,21 @@
-package nl.marijnploeg.kitereparatie.model;
+package nl.marijnploeg.kitereparatie.model.UserRoles;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.apachecommons.CommonsLog;
-import nl.marijnploeg.kitereparatie.model.Authority.Authority;
+import nl.marijnploeg.kitereparatie.model.Address;
+import nl.marijnploeg.kitereparatie.model.Repair;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@DiscriminatorValue(value = "CUSTOMER")
 public class Customer extends AppUser {
 
     @ManyToOne
@@ -24,4 +23,5 @@ public class Customer extends AppUser {
 
     @OneToMany(mappedBy = "repairID")
     private List<Repair> repairs;
+
 }

@@ -1,15 +1,10 @@
 package nl.marijnploeg.kitereparatie.controller;
 
 import nl.marijnploeg.kitereparatie.model.Address;
-import nl.marijnploeg.kitereparatie.model.Customer;
 import nl.marijnploeg.kitereparatie.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.servlet.http.HttpServletResponse;
-import java.net.URI;
 
 @RestController
 @RequestMapping("/customers")

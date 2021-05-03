@@ -2,23 +2,18 @@ package nl.marijnploeg.kitereparatie.service;
 
 import lombok.AllArgsConstructor;
 import nl.marijnploeg.kitereparatie.exception.EmailNotFoundException;
-import nl.marijnploeg.kitereparatie.model.AppUser;
-import nl.marijnploeg.kitereparatie.model.Authority.Authority;
-import nl.marijnploeg.kitereparatie.model.Customer;
+import nl.marijnploeg.kitereparatie.model.ConfirmationToken;
+import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
 import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
-import nl.marijnploeg.kitereparatie.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -26,8 +21,8 @@ public class AppUserService implements UserDetailsService {
 
     @Autowired
     private AppUserRepository appUserRepository;
+    private final ConfirmationTokenService confirmationTokenService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
 //    Overriding this method with email as username
     @Override
@@ -52,10 +47,24 @@ public class AppUserService implements UserDetailsService {
 
         appUserRepository.save(appUser);
 
-//        TODO: Send confirmation token
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                appUser
+        );
 
-        return "";
+//        TODO: Send eMail
+
+        confirmationTokenService.safeConfirmationToken(confirmationToken);
+        return token;
     }
+
+    public int enableAppUser(String email) {
+        return appUserRepository.enableAppUser(email);
+    }
+
 
 //    public Set<Authority> getAuthorities(String email) {
 //        if (!appUserRepository.existsByEmail(email)) throw new EmailNotFoundException(email);

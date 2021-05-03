@@ -1,9 +1,9 @@
 package nl.marijnploeg.kitereparatie.model;
 
 import lombok.*;
+import nl.marijnploeg.kitereparatie.model.UserRoles.Customer;
 
 import javax.persistence.*;
-import java.sql.Array;
 import java.util.List;
 
 @Entity

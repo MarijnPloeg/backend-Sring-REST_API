@@ -1,9 +1,10 @@
-package nl.marijnploeg.kitereparatie.model;
+package nl.marijnploeg.kitereparatie.model.UserRoles;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nl.marijnploeg.kitereparatie.model.Enums.AppUserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,9 @@ import java.util.Collections;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
 public class AppUser implements UserDetails {
 
     @Id
@@ -28,8 +31,8 @@ public class AppUser implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    private boolean locked;
-    private boolean enabled;
+    private boolean locked = false;
+    private boolean enabled = false;
 
     public AppUser(String firstName,
                    String lastName,
@@ -51,12 +54,12 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return this.email;
     }
 
     public String getFirstName() {

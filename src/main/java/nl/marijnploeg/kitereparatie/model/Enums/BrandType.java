@@ -1,4 +1,4 @@
-package nl.marijnploeg.kitereparatie.model;
+package nl.marijnploeg.kitereparatie.model.Enums;
 
 public enum BrandType {
 

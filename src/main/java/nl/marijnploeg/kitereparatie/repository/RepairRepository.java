@@ -1,11 +1,9 @@
 package nl.marijnploeg.kitereparatie.repository;
 
-import nl.marijnploeg.kitereparatie.model.Brand;
 import nl.marijnploeg.kitereparatie.model.Repair;
-import nl.marijnploeg.kitereparatie.model.RepairType;
+import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;

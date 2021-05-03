@@ -1,7 +1,7 @@
 package nl.marijnploeg.kitereparatie.service;
 
 import nl.marijnploeg.kitereparatie.model.Brand;
-import nl.marijnploeg.kitereparatie.model.BrandType;
+import nl.marijnploeg.kitereparatie.model.Enums.BrandType;
 import nl.marijnploeg.kitereparatie.repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

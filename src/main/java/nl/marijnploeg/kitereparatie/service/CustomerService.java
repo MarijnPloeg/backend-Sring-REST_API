@@ -1,22 +1,15 @@
 package nl.marijnploeg.kitereparatie.service;
 
-import nl.marijnploeg.kitereparatie.exception.EmailNotFoundException;
 import nl.marijnploeg.kitereparatie.model.Address;
-import nl.marijnploeg.kitereparatie.model.AppUser;
-import nl.marijnploeg.kitereparatie.model.Authority.Authority;
-import nl.marijnploeg.kitereparatie.model.Customer;
+import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
+import nl.marijnploeg.kitereparatie.model.UserRoles.Customer;
 import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import nl.marijnploeg.kitereparatie.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CustomerService {
