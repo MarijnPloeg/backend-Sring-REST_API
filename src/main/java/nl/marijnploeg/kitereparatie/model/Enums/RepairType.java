@@ -23,7 +23,7 @@ public enum RepairType {
             return KITE;
         }
         if (type.equals("Wetsuit") || type.equals("wetsuit")) {
-            return KITE;
+            return WETSUIT;
         }
         throw new UnsupportedOperationException(
                 "The type " + type + " is not supported!"

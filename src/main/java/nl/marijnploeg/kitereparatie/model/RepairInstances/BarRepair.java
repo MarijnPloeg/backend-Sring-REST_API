@@ -1,5 +1,6 @@
 package nl.marijnploeg.kitereparatie.model.RepairInstances;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue(value = "BAR")
+@JsonTypeName("Bar")
 public class BarRepair extends Repair {
-
     private boolean lengthCheck;
 }

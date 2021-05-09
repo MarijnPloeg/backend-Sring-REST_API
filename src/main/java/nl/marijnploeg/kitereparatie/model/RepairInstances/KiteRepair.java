@@ -1,5 +1,6 @@
 package nl.marijnploeg.kitereparatie.model.RepairInstances;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor @AllArgsConstructor
 @DiscriminatorValue(value = "KITE")
+@JsonTypeName("Kite")
 public class KiteRepair extends Repair {
 
     private boolean leadingEdge;

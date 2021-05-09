@@ -30,7 +30,7 @@ public class AuthenticationController {
     @Autowired
     JwtUtil jwtUtil;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
         return ResponseEntity.ok().body(principal);
@@ -57,6 +57,6 @@ public class AuthenticationController {
 
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse("JWToken : " + jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

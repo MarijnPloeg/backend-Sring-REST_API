@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,6 +26,7 @@ public class AppUserService implements UserDetailsService {
     private final ConfirmationTokenService confirmationTokenService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
+
 //    Overriding this method with email as username
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -60,6 +63,14 @@ public class AppUserService implements UserDetailsService {
 
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
+    }
+
+    public List<AppUser> getAppUsers() {
+        return appUserRepository.findAll();
+    }
+
+    public Optional<AppUser> getUserByEmail(String email) {
+        return appUserRepository.findByEmail(email);
     }
 
 }
