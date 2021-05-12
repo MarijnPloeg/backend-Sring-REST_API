@@ -3,6 +3,7 @@ package nl.marijnploeg.kitereparatie.service;
 import nl.marijnploeg.kitereparatie.exception.DatabaseErrorException;
 import nl.marijnploeg.kitereparatie.exception.RecordNotFoundException;
 import nl.marijnploeg.kitereparatie.model.Address;
+import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,9 @@ public class AddressService {
         }
     }
 
-    public long saveAddress(Address address) {
+    public long saveAddress(AppUser appUser, Address address) {
         Address newAddress = addressRepository.save(address);
+        newAddress.addToList(appUser);
         return newAddress.getAddressID();
     }
 

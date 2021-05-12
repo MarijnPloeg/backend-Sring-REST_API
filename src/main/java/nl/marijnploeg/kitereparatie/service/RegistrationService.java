@@ -3,7 +3,7 @@ package nl.marijnploeg.kitereparatie.service;
 import lombok.AllArgsConstructor;
 import nl.marijnploeg.kitereparatie.email.EmailSender;
 import nl.marijnploeg.kitereparatie.model.ConfirmationToken;
-import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
+import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.security.rolesAndPermissions.AppUserRole;
 import nl.marijnploeg.kitereparatie.request.RegistrationRequest;
 import nl.marijnploeg.kitereparatie.security.registration.EmailValidator;

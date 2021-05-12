@@ -1,17 +1,17 @@
 package nl.marijnploeg.kitereparatie.controller;
 
+import javassist.NotFoundException;
 import nl.marijnploeg.kitereparatie.model.Address;
-import nl.marijnploeg.kitereparatie.repository.AddressRepository;
+import nl.marijnploeg.kitereparatie.model.AppUser;
+import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import nl.marijnploeg.kitereparatie.service.AddressService;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/addresses")
@@ -39,16 +39,16 @@ public class AddressController {
         return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-    @PostMapping(value = "")
-    public ResponseEntity<Object> saveAddress(@RequestBody Address address) {
-        long newId = addressService.saveAddress(address);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newId).toUri();
-
-        return ResponseEntity.created(location).body(location);
-    }
+//    @CrossOrigin
+//    @PostMapping(value = "")
+//    public ResponseEntity<Object> saveAddress(@RequestBody AppUser appUser, @RequestBody Address address) {
+//        long newId = addressService.saveAddress(appUser, address);
+//
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                .buildAndExpand(newId).toUri();
+//
+//        return ResponseEntity.created(location).body(location);
+//    }
 
     @CrossOrigin
     @PutMapping(value = "/{id}")

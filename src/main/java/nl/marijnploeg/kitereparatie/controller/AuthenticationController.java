@@ -2,13 +2,10 @@ package nl.marijnploeg.kitereparatie.controller;
 
 import nl.marijnploeg.kitereparatie.payload.AuthenticationRequest;
 import nl.marijnploeg.kitereparatie.payload.AuthenticationResponse;
-import nl.marijnploeg.kitereparatie.security.config.WebSecurityConfig;
 import nl.marijnploeg.kitereparatie.service.AppUserService;
-import nl.marijnploeg.kitereparatie.service.CustomerService;
 import nl.marijnploeg.kitereparatie.service.JwtUtil;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

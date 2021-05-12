@@ -1,10 +1,11 @@
 package nl.marijnploeg.kitereparatie.controller;
 
+import javassist.NotFoundException;
+import nl.marijnploeg.kitereparatie.helpers.FileUploadUtil;
 import nl.marijnploeg.kitereparatie.model.Address;
-import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
-import nl.marijnploeg.kitereparatie.security.rolesAndPermissions.AppUserRole;
+import nl.marijnploeg.kitereparatie.model.AppUser;
+import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import nl.marijnploeg.kitereparatie.service.AppUserService;
-import nl.marijnploeg.kitereparatie.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -20,6 +22,10 @@ public class AppUserController {
 
     @Autowired
     private AppUserService appUserService;
+
+    @Autowired
+    private AppUserRepository appUserRepository;
+
 
     @CrossOrigin
     @GetMapping("")
@@ -30,8 +36,19 @@ public class AppUserController {
 
     @CrossOrigin
     @GetMapping("/{email}")
-    public ResponseEntity<Object> getCustomerByEmail(@PathVariable String email) {
+    public ResponseEntity<Object> getAppUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok().body(appUserService.getUserByEmail(email));
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+    @PostMapping("/{appUserId}/address")
+    public AppUser appUser(@PathVariable Long appUserId,
+                                    @Valid @RequestBody Address address) throws NotFoundException {
+        return appUserRepository.findById(appUserId)
+                .map(appUser -> {
+                    appUser.setAddress(address);
+                    return appUserRepository.save(appUser);
+                }).orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
     @CrossOrigin
@@ -45,5 +62,7 @@ public class AppUserController {
         String uploadDir = "profile_img/" + savedAppUser.getAppUserId();
 
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        return new RedirectView("/users", true);
     }
 }

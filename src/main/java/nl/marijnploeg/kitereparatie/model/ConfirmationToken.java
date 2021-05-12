@@ -1,10 +1,8 @@
 package nl.marijnploeg.kitereparatie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

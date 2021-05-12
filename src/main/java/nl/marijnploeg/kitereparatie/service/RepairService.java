@@ -41,8 +41,8 @@ public class RepairService {
         return repairRepository.findRepairsByDateCreated(dateCreated);
     }
 
-    public List<Repair> findRepairsByCustomerID(long customerId) {
-        return repairRepository.findRepairsByCustomerID(customerId);
+    public List<Repair> findRepairsByAppUserId(long appUserId) {
+        return repairRepository.findRepairsByAppUserId(appUserId);
     }
 
     public long saveRepair(Repair repair) {
@@ -57,7 +57,7 @@ public class RepairService {
                 assert existingRepair != null;
                 existingRepair.setBrand(repair.getBrand());
                 existingRepair.setBuildYear(repair.getBuildYear());
-                existingRepair.setCustomerID(repair.getCustomerID());
+                existingRepair.setAppUserId(repair.getAppUserId());
                 existingRepair.setCleanProduct(repair.isCleanProduct());
                 existingRepair.setExpressRepair(repair.isExpressRepair());
                 existingRepair.setModel(repair.getModel());

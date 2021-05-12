@@ -1,5 +1,6 @@
-package nl.marijnploeg.kitereparatie.model.UserRoles;
+package nl.marijnploeg.kitereparatie.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,8 +32,9 @@ public class AppUser implements UserDetails {
     private String email;
     private String password;
     private String profileImg;
-    @ManyToOne
-    private Address addressID;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Address address;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private boolean locked = false;
@@ -72,6 +74,12 @@ public class AppUser implements UserDetails {
 
     public String getLastName() {
         return lastName;
+    }
+
+    @Transient
+    public String getImagePath() {
+        if (profileImg == null || appUserId == null){ return null;}
+        return "/profile-img/" + appUserId + "/" + profileImg;
     }
 
     @Override

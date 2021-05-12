@@ -1,21 +1,15 @@
 package nl.marijnploeg.kitereparatie.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nl.marijnploeg.kitereparatie.converter.RepairTypeConverter;
-import nl.marijnploeg.kitereparatie.model.Enums.BoardType;
 import nl.marijnploeg.kitereparatie.model.Enums.DeliveryOption;
 import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
 import nl.marijnploeg.kitereparatie.model.RepairInstances.BarRepair;
 import nl.marijnploeg.kitereparatie.model.RepairInstances.BoardRepair;
 import nl.marijnploeg.kitereparatie.model.RepairInstances.KiteRepair;
 import nl.marijnploeg.kitereparatie.model.RepairInstances.WetsuitRepair;
-import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
-import nl.marijnploeg.kitereparatie.model.UserRoles.Customer;
-import nl.marijnploeg.kitereparatie.model.UserRoles.Employee;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -44,14 +38,14 @@ public abstract class Repair {
     public long repairID;
 
     @ManyToOne
-    private AppUser customerID;
+    private AppUser appUserId;
 
     @Convert(converter = RepairTypeConverter.class)
     @Column(name = "repair_type")
     private RepairType repairType;
 
     @OneToMany
-    private List<Employee> employeeList;
+    private List<AppUser> employeeList;
 
     @Enumerated(EnumType.STRING)
     private DeliveryOption deliveryOption;

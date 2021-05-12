@@ -3,7 +3,7 @@ package nl.marijnploeg.kitereparatie.service;
 import lombok.AllArgsConstructor;
 import nl.marijnploeg.kitereparatie.exception.EmailNotFoundException;
 import nl.marijnploeg.kitereparatie.model.ConfirmationToken;
-import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
+import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

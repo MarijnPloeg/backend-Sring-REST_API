@@ -1,8 +1,6 @@
 package nl.marijnploeg.kitereparatie.model;
 
 import lombok.*;
-import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
-import nl.marijnploeg.kitereparatie.model.UserRoles.Customer;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,9 +16,9 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressID;
 
-    @OneToMany(mappedBy = "appUserId")
+    @OneToMany(mappedBy = "appUserId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(nullable = false)
-    private List<AppUser> appUserId;
+    private List<AppUser> appUsers;
 
     @Column(name = "street_name", nullable = false, length = 75)
     private String streetName;
@@ -40,4 +38,7 @@ public class Address {
     @Column(nullable = true, length = 200)
     private String country;
 
+    public void addToList(AppUser appUser) {
+        appUsers.add(appUser);
+    }
 }
