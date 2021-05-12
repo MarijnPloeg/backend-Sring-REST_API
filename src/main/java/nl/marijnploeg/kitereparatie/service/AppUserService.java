@@ -73,4 +73,8 @@ public class AppUserService implements UserDetailsService {
         return appUserRepository.findByEmail(email);
     }
 
+    public AppUser save(AppUser appUser) {
+        AppUser newAppUser = appUserRepository.save(appUser);
+        return newAppUser;
+    }
 }

@@ -34,6 +34,6 @@ public class CustomerService {
 
     public long saveCustomer(Customer customer) {
         AppUser newCustomer = appUserRepository.save(customer);
-        return newCustomer.getId();
+        return newCustomer.getAppUserId();
     }
 }

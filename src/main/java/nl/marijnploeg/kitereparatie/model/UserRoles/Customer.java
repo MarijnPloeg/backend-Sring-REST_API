@@ -18,9 +18,6 @@ import java.util.List;
 @DiscriminatorValue(value = "CUSTOMER")
 public class Customer extends AppUser {
 
-    @ManyToOne
-    private Address addressID;
-
     @OneToMany(mappedBy = "repairID")
     private List<Repair> repairs;
 

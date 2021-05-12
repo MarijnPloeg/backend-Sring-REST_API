@@ -1,6 +1,7 @@
 package nl.marijnploeg.kitereparatie.model;
 
 import lombok.*;
+import nl.marijnploeg.kitereparatie.model.UserRoles.AppUser;
 import nl.marijnploeg.kitereparatie.model.UserRoles.Customer;
 
 import javax.persistence.*;
@@ -17,16 +18,17 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressID;
 
-    @OneToMany(mappedBy = "addressID")
-    private List<Customer> customerID;
+    @OneToMany(mappedBy = "appUserId")
+    @Column(nullable = false)
+    private List<AppUser> appUserId;
 
-    @Column(nullable = false, length = 75)
+    @Column(name = "street_name", nullable = false, length = 75)
     private String streetName;
 
-    @Column(nullable = false, length = 10)
+    @Column(name = "house_number", nullable = false, length = 10)
     private int houseNumber;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "city", nullable = false, length = 100)
     private String city;
 
     @Column(nullable = false, length = 12)
@@ -35,7 +37,7 @@ public class Address {
     @Column(nullable = true, length = 50)
     private String State;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = true, length = 200)
     private String country;
 
 }

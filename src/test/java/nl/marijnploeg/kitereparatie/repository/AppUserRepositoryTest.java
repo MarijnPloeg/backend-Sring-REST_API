@@ -30,7 +30,7 @@ public class AppUserRepositoryTest {
         appUser.setEmail("jane.doe@example.org");
         appUser.setPassword("iloveyou");
         appUser.setLocked(true);
-        appUser.setId(123L);
+        appUser.setAppUserId(123L);
         appUser.setAppUserRole(AppUserRole.CUSTOMER);
         appUser.setEnabled(true);
         appUser.setFirstName("Jane");
@@ -40,7 +40,7 @@ public class AppUserRepositoryTest {
         appUser1.setEmail("jane.doe@example.org");
         appUser1.setPassword("iloveyou");
         appUser1.setLocked(true);
-        appUser1.setId(123L);
+        appUser1.setAppUserId(123L);
         appUser1.setAppUserRole(AppUserRole.CUSTOMER);
         appUser1.setEnabled(true);
         appUser1.setFirstName("Jane");
@@ -56,7 +56,7 @@ public class AppUserRepositoryTest {
         appUser.setEmail("jane.doe@example.org");
         appUser.setPassword("iloveyou");
         appUser.setLocked(true);
-        appUser.setId(123L);
+        appUser.setAppUserId(123L);
         appUser.setAppUserRole(AppUserRole.CUSTOMER);
         appUser.setEnabled(true);
         appUser.setFirstName("Jane");
@@ -66,7 +66,7 @@ public class AppUserRepositoryTest {
         appUser1.setEmail("jane.doe@example.org");
         appUser1.setPassword("iloveyou");
         appUser1.setLocked(true);
-        appUser1.setId(123L);
+        appUser1.setAppUserId(123L);
         appUser1.setAppUserRole(AppUserRole.CUSTOMER);
         appUser1.setEnabled(true);
         appUser1.setFirstName("Jane");

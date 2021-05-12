@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nl.marijnploeg.kitereparatie.model.Address;
 import nl.marijnploeg.kitereparatie.security.rolesAndPermissions.AppUserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,11 +25,14 @@ public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long appUserId;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private String profileImg;
+    @ManyToOne
+    private Address addressID;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private boolean locked = false;

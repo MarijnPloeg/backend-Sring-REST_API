@@ -39,7 +39,7 @@ public class AddressController {
         return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @PostMapping(value = "")
     public ResponseEntity<Object> saveAddress(@RequestBody Address address) {
         long newId = addressService.saveAddress(address);
