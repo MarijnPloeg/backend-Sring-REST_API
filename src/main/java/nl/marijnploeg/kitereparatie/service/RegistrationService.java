@@ -2,15 +2,18 @@ package nl.marijnploeg.kitereparatie.service;
 
 import lombok.AllArgsConstructor;
 import nl.marijnploeg.kitereparatie.email.EmailSender;
+import nl.marijnploeg.kitereparatie.exception.ApiExceptions.ApiRequestException;
 import nl.marijnploeg.kitereparatie.model.ConfirmationToken;
 import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.security.rolesAndPermissions.AppUserRole;
 import nl.marijnploeg.kitereparatie.request.RegistrationRequest;
 import nl.marijnploeg.kitereparatie.security.registration.EmailValidator;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +27,7 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
-            throw new IllegalStateException("Email not valid!");
+            throw new ApiRequestException("Email not valid!");
         }
 
         String token = appUserService.signUpUser(
@@ -48,16 +51,16 @@ public class RegistrationService {
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
                 .orElseThrow(() ->
-                        new IllegalStateException("token not found"));
+                        new ApiRequestException("token not found"));
 
         if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("email already confirmed");
+            throw new ApiRequestException("email already confirmed");
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 
         if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException("token expired");
+            throw new ApiRequestException("token expired");
         }
 
         confirmationTokenService.setConfirmedAt(token);

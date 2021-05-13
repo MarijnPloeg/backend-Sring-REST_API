@@ -16,7 +16,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressID;
 
-    @OneToMany(mappedBy = "appUserId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(nullable = false)
     private List<AppUser> appUsers;
 

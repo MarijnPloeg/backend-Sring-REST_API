@@ -1,12 +1,14 @@
 package nl.marijnploeg.kitereparatie.controller;
 
 import javassist.NotFoundException;
+import nl.marijnploeg.kitereparatie.exception.ApiExceptions.ApiRequestException;
 import nl.marijnploeg.kitereparatie.helpers.FileUploadUtil;
 import nl.marijnploeg.kitereparatie.model.Address;
 import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import nl.marijnploeg.kitereparatie.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -36,19 +38,23 @@ public class AppUserController {
 
     @CrossOrigin
     @GetMapping("/{email}")
-    public ResponseEntity<Object> getAppUserByEmail(@PathVariable String email) {
+    public ResponseEntity<Object> getAppUserByEmail(@PathVariable String email)  {
+        if (appUserRepository.findByEmail(email).isPresent()) {
         return ResponseEntity.ok().body(appUserService.getUserByEmail(email));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Gebruiker met email " + email + " niet gevonden!");
+        }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+    @CrossOrigin
     @PostMapping("/{appUserId}/address")
-    public AppUser appUser(@PathVariable Long appUserId,
-                                    @Valid @RequestBody Address address) throws NotFoundException {
+    public AppUser getAppUserAddress(@PathVariable Long appUserId,
+                                    @Valid @RequestBody Address address) throws ApiRequestException {
         return appUserRepository.findById(appUserId)
                 .map(appUser -> {
                     appUser.setAddress(address);
                     return appUserRepository.save(appUser);
-                }).orElseThrow(() -> new NotFoundException("User not found!"));
+                }).orElseThrow(() -> new ApiRequestException("User not found!"));
     }
 
     @CrossOrigin

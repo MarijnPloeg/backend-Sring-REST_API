@@ -32,9 +32,12 @@ public class AppUser implements UserDetails {
     private String email;
     private String password;
     private String profileImg;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
+    @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "user_id"))
     private Address address;
+
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private boolean locked = false;

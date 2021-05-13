@@ -1,5 +1,6 @@
 package nl.marijnploeg.kitereparatie.service;
 
+import nl.marijnploeg.kitereparatie.exception.ApiExceptions.ApiRequestException;
 import nl.marijnploeg.kitereparatie.exception.DatabaseErrorException;
 import nl.marijnploeg.kitereparatie.exception.RecordNotFoundException;
 import nl.marijnploeg.kitereparatie.model.Address;
@@ -25,6 +26,14 @@ public class AddressService {
             return addressRepository.findById(id).orElse(null);
         } else {
             throw new RecordNotFoundException();
+        }
+    }
+
+    public Address getAddressByUserId(long id) {
+        if (addressRepository.existsAddressByAppUsers(id)) {
+            return addressRepository.findAddressByAppUsers(id);
+        } else {
+            throw new ApiRequestException("Deze gebruiker heeft nog geen adres!");
         }
     }
 

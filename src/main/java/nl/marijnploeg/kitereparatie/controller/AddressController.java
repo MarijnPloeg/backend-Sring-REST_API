@@ -5,6 +5,7 @@ import nl.marijnploeg.kitereparatie.model.Address;
 import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import nl.marijnploeg.kitereparatie.service.AddressService;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +34,20 @@ public class AddressController {
     }
 
     @CrossOrigin
+    @GetMapping(value = "/klant/{id}")
+    public ResponseEntity<Object> getAddressByUserId(@PathVariable("id") long id) {
+        return ResponseEntity.ok().body(addressService.getAddressByUserId(id));
+    }
+
+
+    @CrossOrigin
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteAddressById(@PathVariable("id") long id) {
         addressService.deleteAddress(id);
         return ResponseEntity.noContent().build();
     }
+
+
 
 //    @CrossOrigin
 //    @PostMapping(value = "")

@@ -6,6 +6,7 @@ import nl.marijnploeg.kitereparatie.service.AppUserService;
 import nl.marijnploeg.kitereparatie.service.JwtUtil;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,7 +36,7 @@ public class AuthenticationController {
 
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @PostMapping(value = "/authenticate")
-        public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
 
         String email = authenticationRequest.getEmail();
         String password = authenticationRequest.getPassword();
@@ -45,8 +46,9 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(email, password)
             );
         }
+
         catch (BadCredentialsException ex) {
-            throw new Exception("Incorrect username or password", ex);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Verkeerd wachtwoord ingevuld!");
         }
 
         final UserDetails userDetails = appUserService

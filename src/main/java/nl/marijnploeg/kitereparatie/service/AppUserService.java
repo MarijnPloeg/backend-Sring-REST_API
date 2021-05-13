@@ -1,6 +1,7 @@
 package nl.marijnploeg.kitereparatie.service;
 
 import lombok.AllArgsConstructor;
+import nl.marijnploeg.kitereparatie.exception.ApiExceptions.ApiRequestException;
 import nl.marijnploeg.kitereparatie.exception.EmailNotFoundException;
 import nl.marijnploeg.kitereparatie.model.ConfirmationToken;
 import nl.marijnploeg.kitereparatie.model.AppUser;
@@ -22,9 +23,9 @@ import java.util.UUID;
 public class AppUserService implements UserDetailsService {
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
     private final ConfirmationTokenService confirmationTokenService;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
 
 //    Overriding this method with email as username
@@ -41,7 +42,7 @@ public class AppUserService implements UserDetailsService {
                 .isPresent();
 
         if (userExists) {
-            throw new IllegalStateException("Email already taken!");
+            throw new ApiRequestException("Email al in gebruik!");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
