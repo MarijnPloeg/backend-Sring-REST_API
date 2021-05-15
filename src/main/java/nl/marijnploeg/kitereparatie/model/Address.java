@@ -1,8 +1,11 @@
 package nl.marijnploeg.kitereparatie.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,9 +19,14 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressID;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Column(nullable = false)
-    private List<AppUser> appUsers;
+    @OneToMany(
+            mappedBy = "address",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "appUserId")
+    private List<AppUser> appUsers = new ArrayList<>();
+
 
     @Column(name = "street_name", nullable = false, length = 75)
     private String streetName;
@@ -38,7 +46,14 @@ public class Address {
     @Column(nullable = true, length = 200)
     private String country;
 
-    public void addToList(AppUser appUser) {
+    public void addUser(AppUser appUser) {
         appUsers.add(appUser);
+        appUser.setAddress(this);
     }
+
+    public void removeUser(AppUser appUser) {
+        appUsers.remove(appUser);
+        appUser.setAddress(null);
+    }
+
 }

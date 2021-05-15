@@ -1,6 +1,6 @@
 package nl.marijnploeg.kitereparatie.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 
 
 @Entity
@@ -33,9 +34,8 @@ public class AppUser implements UserDetails {
     private String password;
     private String profileImg;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "user_id"))
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressID")
     private Address address;
 
     @Enumerated(EnumType.STRING)
@@ -53,6 +53,18 @@ public class AppUser implements UserDetails {
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof AppUser )) return false;
+        return appUserId != null && appUserId.equals(((AppUser) obj).getAppUserId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
     @Override

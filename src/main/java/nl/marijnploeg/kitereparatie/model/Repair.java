@@ -50,6 +50,9 @@ public abstract class Repair {
     @Enumerated(EnumType.STRING)
     private DeliveryOption deliveryOption;
 
+    @Column(nullable = true)
+    private boolean repairStatus;
+
     private boolean expressRepair;
 
     private boolean cleanProduct;
@@ -72,6 +75,4 @@ public abstract class Repair {
 
     @Column(nullable = false)
     private String repairNote;
-
-
 }

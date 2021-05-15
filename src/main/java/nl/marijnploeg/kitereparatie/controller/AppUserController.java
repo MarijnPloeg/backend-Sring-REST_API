@@ -1,6 +1,6 @@
 package nl.marijnploeg.kitereparatie.controller;
 
-import javassist.NotFoundException;
+import org.apache.commons.io.IOUtils;
 import nl.marijnploeg.kitereparatie.exception.ApiExceptions.ApiRequestException;
 import nl.marijnploeg.kitereparatie.helpers.FileUploadUtil;
 import nl.marijnploeg.kitereparatie.model.Address;
@@ -9,7 +9,9 @@ import nl.marijnploeg.kitereparatie.repository.AppUserRepository;
 import nl.marijnploeg.kitereparatie.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.io.InputStream;
 
 @RestController
 @RequestMapping("/users")
@@ -71,4 +74,12 @@ public class AppUserController {
 
         return new RedirectView("/users", true);
     }
+
+
+    @CrossOrigin
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Object> uploadFile(@RequestParam MultipartFile file) {
+        return ResponseEntity.ok().build();
+    }
+
 }

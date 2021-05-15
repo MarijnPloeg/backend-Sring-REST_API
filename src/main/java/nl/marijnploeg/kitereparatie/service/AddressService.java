@@ -47,7 +47,7 @@ public class AddressService {
 
     public long saveAddress(AppUser appUser, Address address) {
         Address newAddress = addressRepository.save(address);
-        newAddress.addToList(appUser);
+        newAddress.addUser(appUser);
         return newAddress.getAddressID();
     }
 
