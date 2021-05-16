@@ -2,6 +2,7 @@ package nl.marijnploeg.kitereparatie.service;
 
 import nl.marijnploeg.kitereparatie.exception.DatabaseErrorException;
 import nl.marijnploeg.kitereparatie.exception.RecordNotFoundException;
+import nl.marijnploeg.kitereparatie.model.Brand;
 import nl.marijnploeg.kitereparatie.model.Repair;
 import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
 import nl.marijnploeg.kitereparatie.repository.RepairRepository;

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "maildev": "^0.5.2"
+    "maildev": "^0.5.2",
+    "react-images-upload": "^1.2.8"
   }
 }
