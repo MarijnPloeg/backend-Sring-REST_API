@@ -1,5 +1,6 @@
 package nl.marijnploeg.kitereparatie.repository;
 
+import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.model.Brand;
 import nl.marijnploeg.kitereparatie.model.Repair;
 import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
@@ -22,5 +23,5 @@ public interface RepairRepository extends JpaRepository<Repair, Long> {
 
     List<Repair> findRepairsByDateCreated(Date dateCreated);
 
-    List<Repair> findRepairsByAppUserId(long customerId);
+    List<Repair> findRepairsByAppUserId(AppUser id);
 }

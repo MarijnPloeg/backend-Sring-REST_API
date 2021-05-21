@@ -2,6 +2,7 @@ package nl.marijnploeg.kitereparatie.service;
 
 import nl.marijnploeg.kitereparatie.exception.DatabaseErrorException;
 import nl.marijnploeg.kitereparatie.exception.RecordNotFoundException;
+import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.model.Brand;
 import nl.marijnploeg.kitereparatie.model.Repair;
 import nl.marijnploeg.kitereparatie.model.Enums.RepairType;
@@ -42,7 +43,7 @@ public class RepairService {
         return repairRepository.findRepairsByDateCreated(dateCreated);
     }
 
-    public List<Repair> findRepairsByAppUserId(long appUserId) {
+    public List<Repair> getRepairsByAppUserId(AppUser appUserId) {
         return repairRepository.findRepairsByAppUserId(appUserId);
     }
 

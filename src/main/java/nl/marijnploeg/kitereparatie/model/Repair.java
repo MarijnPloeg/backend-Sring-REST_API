@@ -11,9 +11,6 @@ import nl.marijnploeg.kitereparatie.model.RepairInstances.BoardRepair;
 import nl.marijnploeg.kitereparatie.model.RepairInstances.KiteRepair;
 import nl.marijnploeg.kitereparatie.model.RepairInstances.WetsuitRepair;
 import org.hibernate.annotations.CreationTimestamp;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,7 +34,7 @@ import java.util.List;
 public abstract class Repair {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long repairID;
 
     @ManyToOne

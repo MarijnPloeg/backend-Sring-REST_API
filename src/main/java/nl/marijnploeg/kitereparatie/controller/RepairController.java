@@ -1,5 +1,6 @@
 package nl.marijnploeg.kitereparatie.controller;
 
+import nl.marijnploeg.kitereparatie.model.AppUser;
 import nl.marijnploeg.kitereparatie.model.Repair;
 import nl.marijnploeg.kitereparatie.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class RepairController {
         return ResponseEntity.created(location).body("New repair created at: ");
     }
 
-
-
+    @CrossOrigin
+    @GetMapping(value = "/klant/{id}")
+    public ResponseEntity<Object> getRepairByUserId(@PathVariable("id") AppUser appUserId) {
+        return ResponseEntity.ok().body(repairService.getRepairsByAppUserId(appUserId));
+    }
 }

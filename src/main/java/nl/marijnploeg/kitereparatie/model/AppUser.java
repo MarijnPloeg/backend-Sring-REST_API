@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -26,7 +27,7 @@ import java.util.Objects;
 public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long appUserId;
     private String firstName;
     private String lastName;
@@ -61,6 +62,7 @@ public class AppUser implements UserDetails {
         if (!(obj instanceof AppUser )) return false;
         return appUserId != null && appUserId.equals(((AppUser) obj).getAppUserId());
     }
+
 
     @Override
     public int hashCode() {
