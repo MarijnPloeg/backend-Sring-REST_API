@@ -1,5 +1,6 @@
 package nl.marijnploeg.kitereparatie.filter;
 
+import nl.marijnploeg.kitereparatie.service.AppUserService;
 import nl.marijnploeg.kitereparatie.service.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +21,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private AppUserService userDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;

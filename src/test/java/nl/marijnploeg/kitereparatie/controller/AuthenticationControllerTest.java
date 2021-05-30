@@ -64,17 +64,52 @@ public class AuthenticationControllerTest {
     }
 
     @Test
+    public void testAuthenticated3() throws Exception {
+        MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/authenticated");
+        MockHttpServletRequestBuilder requestBuilder = getResult.param("authentication",
+                String.valueOf(Authentication.RSA));
+        MockMvcBuilders.standaloneSetup(this.authenticationController)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
     public void testCreateAuthenticationToken() throws Exception {
-        when(this.jwtUtil.generateToken((org.springframework.security.core.userdetails.UserDetails) any()))
+        when(this.jwtUtil.generateToken(any()))
                 .thenReturn("foo");
-        when(this.authenticationManager.authenticate((org.springframework.security.core.Authentication) any()))
+        when(this.authenticationManager.authenticate(any()))
                 .thenReturn(new TestingAuthenticationToken("Principal", "Credentials"));
         when(this.appUserService.loadUserByUsername(anyString()))
-                .thenReturn(new AppUser("Jane", "Doe", "jane.doe@example.org", "iloveyou", AppUserRole.CUSTOMER));
+                .thenReturn(new AppUser("Marijn", "Ploeg", "marijnploeg@gmail.com", "password", AppUserRole.CUSTOMER));
 
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
-        authenticationRequest.setEmail("jane.doe@example.org");
-        authenticationRequest.setPassword("iloveyou");
+        authenticationRequest.setEmail("marijnploeg@gmail.com");
+        authenticationRequest.setPassword("password");
+        String content = (new ObjectMapper()).writeValueAsString(authenticationRequest);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/authenticate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content);
+        MockMvcBuilders.standaloneSetup(this.authenticationController)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("{\"jwt\":\"foo\"}")));
+    }
+
+    @Test
+    public void testCreateAuthenticationToken2() throws Exception {
+        when(this.jwtUtil.generateToken(any()))
+                .thenReturn("foo");
+        when(this.authenticationManager.authenticate(any()))
+                .thenReturn(new TestingAuthenticationToken("Principal", "Credentials"));
+        when(this.appUserService.loadUserByUsername(anyString()))
+                .thenReturn(new AppUser("Hans", "Lieben", "hans@lieben.nl", "password1", AppUserRole.CUSTOMER));
+
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
+        authenticationRequest.setEmail("hans@lieben.nl");
+        authenticationRequest.setPassword("password1");
         String content = (new ObjectMapper()).writeValueAsString(authenticationRequest);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/authenticate")
                 .contentType(MediaType.APPLICATION_JSON)

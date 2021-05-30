@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -61,25 +62,20 @@ public class AppUserController {
     }
 
     @CrossOrigin
-    @PostMapping("/save")
-    public RedirectView saveUser(AppUser appUser, @RequestParam("image")MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        appUser.setProfileImg(fileName);
-
-        AppUser savedAppUser = appUserService.save(appUser);
-
-        String uploadDir = "profile_img/" + savedAppUser.getAppUserId();
-
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
-        return new RedirectView("/users", true);
+    @PostMapping(
+            path = "{userProfileId}/image/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void uploadUserProfileImage(@PathVariable("userProfileId") UUID userProfileId,
+                                       @RequestParam("file") MultipartFile file) {
+        appUserService.uploadUserProfileImage(userProfileId, file);
     }
 
-
     @CrossOrigin
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Object> uploadFile(@RequestParam MultipartFile file) {
-        return ResponseEntity.ok().build();
+    @GetMapping("{userProfileId}/image/download")
+    public byte[] downloadUserProfileImage(@PathVariable("userProfileId") UUID userProfileId) {
+        return appUserService.downloadUserProfileImage(userProfileId);
     }
 
 }

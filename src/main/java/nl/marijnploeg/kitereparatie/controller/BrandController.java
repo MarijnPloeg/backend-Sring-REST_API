@@ -2,7 +2,6 @@ package nl.marijnploeg.kitereparatie.controller;
 
 import nl.marijnploeg.kitereparatie.model.Brand;
 import nl.marijnploeg.kitereparatie.model.Enums.BrandType;
-import nl.marijnploeg.kitereparatie.repository.BrandRepository;
 import nl.marijnploeg.kitereparatie.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

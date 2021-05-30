@@ -12,10 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -56,18 +53,14 @@ public class AppUser implements UserDetails {
         this.appUserRole = appUserRole;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof AppUser )) return false;
-        return appUserId != null && appUserId.equals(((AppUser) obj).getAppUserId());
+    public Optional<String> getUserImageLink() {
+        return Optional.ofNullable(profileImg);
     }
 
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -93,12 +86,6 @@ public class AppUser implements UserDetails {
         return lastName;
     }
 
-    @Transient
-    public String getImagePath() {
-        if (profileImg == null || appUserId == null){ return null;}
-        return "/profile-img/" + appUserId + "/" + profileImg;
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -117,5 +104,20 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppUser that = (AppUser) o;
+        return Objects.equals(appUserId, that.appUserId) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(profileImg, that.profileImg);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(appUserId, email, profileImg);
     }
 }

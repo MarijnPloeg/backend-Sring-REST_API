@@ -9,7 +9,7 @@ public enum AppUserRole {
     EMPLOYEE("Werknemer"),
     MANAGER("Manager");
 
-    private String role;
+    private final String role;
 
     AppUserRole(String role) {
         this.role = role;

@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    public Boolean existsAddressByAppUsers(long appUserId);
+    Boolean existsAddressByAppUsers(long appUserId);
 
-    public Address findAddressByAppUsers(long appUserId);
+    Address findAddressByAppUsers(long appUserId);
 }
